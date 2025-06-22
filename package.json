@@ -1,11 +1,10 @@
 {
   "name": "env-check",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "CLI tool to detect staged .env files and prevent accidental commits of sensitive environment files.",
   "bin": {
     "env-check": "./index.js"
   },
-  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Rajeev-Foryou/env-check.git"
@@ -34,10 +33,13 @@
     "chalk": "^4.1.2",
     "simple-git": "^3.21.0"
   },
+  "devDependencies": {
+    "husky": "^9.1.7"
+  },
   "engines": {
     "node": ">=14"
   },
-  "devDependencies": {
-    "husky": "^9.1.7"
+  "publishConfig": {
+    "access": "public"
   }
 }
