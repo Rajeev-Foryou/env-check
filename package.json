@@ -1,0 +1,43 @@
+{
+  "name": "env-check",
+  "version": "1.0.0",
+  "description": "CLI tool to detect staged .env files and prevent accidental commits of sensitive environment files.",
+  "bin": {
+    "env-check": "./index.js"
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rajeev-Foryou/env-check.git"
+  },
+  "keywords": [
+    "cli",
+    "env",
+    "git",
+    "husky",
+    "security",
+    "pre-commit"
+  ],
+  "author": "Rajeev Ranjan <mandalrajeev3@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Rajeev-Foryou/env-check/issues"
+  },
+  "homepage": "https://github.com/Rajeev-Foryou/env-check#readme",
+  "type": "module",
+  "scripts": {
+    "prepare": "husky install",
+    "postinstall": "npm run add-hook",
+    "add-hook": "npx husky add .husky/pre-commit \"npx env-check\""
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "simple-git": "^3.21.0"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
+  }
+}
