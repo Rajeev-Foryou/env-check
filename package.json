@@ -2,6 +2,7 @@
   "name": "env-check",
   "version": "0.0.1",
   "description": "CLI tool to detect staged .env files and prevent accidental commits of sensitive environment files.",
+  "main": "index.js",
   "bin": {
     "env-check": "./index.js"
   },
