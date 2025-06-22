@@ -1,4 +1,4 @@
-# env-check 🔒
+# sensi-check 🔒
 
 A robust Node.js CLI tool that prevents accidental commits of sensitive environment files and credentials by automatically blocking Git commits when dangerous files are staged.
 
@@ -19,22 +19,25 @@ A robust Node.js CLI tool that prevents accidental commits of sensitive environm
 ## 📦 Installation
 
 ### Method 1: As a Development Dependency (Recommended)
+
 ```bash
-npm install --save-dev env-check
+npm install --save-dev sensi-check
 ```
 
 ### Method 2: Global Installation
+
 ```bash
-npm install -g env-check
+npm install -g sensi-check
 ```
 
 ### Method 3: Using npx/npm (No Installation Required)
+
 ```bash
 # Using npx
-npx env-check
+npx sensi-check
 
 # Or using npm
-npm exec env-check
+npm exec sensi-check
 ```
 
 ## 🛠️ Setup Guide
@@ -42,25 +45,27 @@ npm exec env-check
 ### Quick Setup (Recommended)
 
 1. **Install the package**:
+
    ```bash
-   npm install --save-dev env-check
+   npm install --save-dev sensi-check
    ```
 
 2. **Test it works**:
+
    ```bash
    # Using npx
-   npx env-check
-   
+   npx sensi-check
+
    # Or using npm
-   npm exec env-check
+   npm exec sensi-check
    ```
 
 3. **Add to your package.json scripts** (optional):
    ```json
    {
      "scripts": {
-       "check-env": "env-check",
-       "precommit": "env-check"
+       "check-env": "sensi-check",
+       "precommit": "sensi-check"
      }
    }
    ```
@@ -69,26 +74,30 @@ npm exec env-check
 
 For teams wanting automatic protection on every commit:
 
-1. **Install Husky and env-check**:
+1. **Install Husky and sensi-check**:
+
    ```bash
-   npm install --save-dev husky env-check
+   npm install --save-dev husky sensi-check
    ```
 
 2. **Initialize Husky**:
+
    ```bash
    npx husky install
    ```
 
 3. **Add the pre-commit hook**:
+
    ```bash
    # Using npx
-   npx husky add .husky/pre-commit "npx env-check"
-   
+   npx husky add .husky/pre-commit "npx sensi-check"
+
    # Or using npm
-   npm exec husky add .husky/pre-commit "npm exec env-check"
+   npm exec husky add .husky/pre-commit "npm exec sensi-check"
    ```
 
 4. **Make hook executable** (Linux/Mac only):
+
    ```bash
    chmod +x .husky/pre-commit
    ```
@@ -107,19 +116,21 @@ For teams wanting automatic protection on every commit:
 If you prefer not to use Husky:
 
 1. **Create the hook file**:
+
    ```bash
    touch .git/hooks/pre-commit
    chmod +x .git/hooks/pre-commit
    ```
 
 2. **Add this content to `.git/hooks/pre-commit`**:
+
    ```bash
    #!/bin/sh
    # Using npx
-   npx env-check
-   
+   npx sensi-check
+
    # Or using npm
-   # npm exec env-check
+   # npm exec sensi-check
    ```
 
 ## 🔧 Usage
@@ -127,43 +138,48 @@ If you prefer not to use Husky:
 ### Command Line Usage
 
 **Basic check** (checks currently staged files):
+
 ```bash
-env-check
+sensi-check
 ```
 
 **Using npx/npm** (if not installed globally):
+
 ```bash
 # Using npx
-npx env-check
+npx sensi-check
 
 # Or using npm
-npm exec env-check
+npm exec sensi-check
 ```
 
 **In npm scripts**:
+
 ```bash
-npm run check-env
+npm run sensi-env
 ```
 
 ### Integration Examples
 
 **In your CI/CD pipeline** (`.github/workflows/ci.yml`):
+
 ```yaml
 - name: Check for sensitive files
   run: |
     # Using npx
-    npx env-check
+    npx sensi-check
     # Or using npm
-    # npm exec env-check
+    # npm exec sensi-check
 ```
 
 **In your package.json**:
+
 ```json
 {
   "scripts": {
-    "precommit": "env-check",
-    "test": "env-check && jest",
-    "build": "env-check && webpack"
+    "precommit": "sensi-check",
+    "test": "sensi-check && jest",
+    "build": "sensi-check && webpack"
   }
 }
 ```
@@ -182,28 +198,30 @@ npm run check-env
 
 The tool automatically detects these sensitive file types:
 
-| Pattern | Description | Examples |
-|---------|-------------|----------|
-| `.env*` | Environment files | `.env`, `.env.local`, `.env.production` |
-| `*.pem` | SSL certificates | `certificate.pem`, `private.pem` |
-| `*.key` | Private keys | `server.key`, `private.key` |
-| `*.crt` | Certificate files | `ssl.crt`, `ca.crt` |
-| `id_rsa*` | SSH keys | `id_rsa`, `id_rsa.pub` |
+| Pattern              | Description         | Examples                                   |
+| -------------------- | ------------------- | ------------------------------------------ |
+| `.env*`              | Environment files   | `.env`, `.env.local`, `.env.production`    |
+| `*.pem`              | SSL certificates    | `certificate.pem`, `private.pem`           |
+| `*.key`              | Private keys        | `server.key`, `private.key`                |
+| `*.crt`              | Certificate files   | `ssl.crt`, `ca.crt`                        |
+| `id_rsa*`            | SSH keys            | `id_rsa`, `id_rsa.pub`                     |
 | `*credentials*.json` | Service credentials | `credentials.json`, `gcp-credentials.json` |
-| `firebase*.json` | Firebase configs | `firebase-adminsdk.json` |
-| `secrets*` | Secret files | `secrets.yml`, `secrets.json` |
-| `*.p12` | PKCS#12 files | `certificate.p12` |
-| `*.keystore` | Java keystores | `app.keystore` |
+| `firebase*.json`     | Firebase configs    | `firebase-adminsdk.json`                   |
+| `secrets*`           | Secret files        | `secrets.yml`, `secrets.json`              |
+| `*.p12`              | PKCS#12 files       | `certificate.p12`                          |
+| `*.keystore`         | Java keystores      | `app.keystore`                             |
 
 ## 📺 Example Output
 
 ### ✅ Safe Commit (No sensitive files)
+
 ```bash
 $ git commit -m "Add new feature"
-# (no output from env-check, commit proceeds)
+# (no output from sensi-check, commit proceeds)
 ```
 
 ### ⛔ Blocked Commit (Sensitive files detected)
+
 ```bash
 $ git commit -m "Update config"
 ⛔  Potential Security Risk: Sensitive files are staged!
@@ -219,14 +237,17 @@ $ git commit -m "Update config"
 ### Common Issues
 
 **"Not a git repository" error**:
+
 - Ensure you're running the command in a Git repository
 - Run `git init` if needed
 
 **Hook not executing**:
+
 - Check hook permissions: `chmod +x .husky/pre-commit`
 - Verify Husky installation: `npx husky install` or `npm exec husky install`
 
 **False positives**:
+
 - The tool is designed to be conservative for security
 - Consider renaming files that match sensitive patterns
 - Add files to `.gitignore` if they shouldn't be committed
@@ -234,15 +255,16 @@ $ git commit -m "Update config"
 ### Getting Help
 
 If you encounter issues:
+
 1. Check that you're in a Git repository
 2. Ensure Node.js version >= 14
-3. Verify the tool works manually: `npx env-check` or `npm exec env-check`
+3. Verify the tool works manually: `npx sensi-check` or `npm exec sensi-check`
 4. Check our [Issues page](https://github.com/Rajeev-Foryou/env-check/issues)
 
 ## 🏗️ Project Structure
 
 ```
-env-check/
+sensi-check/
 ├── index.js              # Main CLI application
 ├── package.json          # Package configuration
 ├── README.md             # This documentation
@@ -270,14 +292,14 @@ We welcome contributions! Here's how to get started:
 ```bash
 # Clone your fork
 git clone https://github.com/Rajeev-Foryou/env-check.git
-cd env-check
+cd sensi-check
 
 # Install dependencies
 npm install
 
 # Test the CLI
 npm link
-env-check
+sensi-check
 
 # Run in development
 node index.js
@@ -296,7 +318,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Maintains security compliance** in team environments
 - **Reduces security incidents** and emergency credential rotations
 
-## 🌟 Why Use env-check?
+## 🌟 Why Use sensi-check?
 
 - **Proactive Security**: Catches issues before they become problems
 - **Team Safety**: Protects entire teams from accidental leaks
