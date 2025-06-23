@@ -1,10 +1,10 @@
 {
-  "name": "sensi-check",
+  "name": "staging-check",
   "version": "0.0.1",
   "description": "CLI tool to detect staged .env files and prevent accidental commits of sensitive environment files.",
   "main": "index.js",
   "bin": {
-    "sensi-check": "index.js"
+    "staging-check": "index.js"
   },
   "repository": {
     "type": "git",
@@ -28,7 +28,7 @@
   "scripts": {
     "prepare": "husky install",
     "postinstall": "npm run add-hook",
-    "add-hook": "npx husky add .husky/pre-commit \"npx sensi-check\""
+    "add-hook": "npx husky add .husky/pre-commit \"npx staging-check\""
   },
   "dependencies": {
     "chalk": "^4.1.2",
